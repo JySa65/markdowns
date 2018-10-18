@@ -357,4 +357,15 @@ END $$
 DELIMITER ;
 ```
 
+### Guardar consultas en un archivo de texto
+
+```sql
+SELECT * FROM a_table
+  WHERE a_field = a_value
+  INTO OUTFILE 'C:/path/to/file.txt'
+  FIELDS TERMINATED BY ','
+  OPTIONALLY ENCLOSED BY ''
+  LINES TERMINATED BY '\n';
+```
+
 [🔙 Regresar](#bases-de-datos)
