@@ -103,12 +103,13 @@
     <section class="Footer-container">
       <nav class="SocialMedia">
         <ul>
-          <li><a href="https://facebook.com" target="_blank">facebook</a></li>
-          <li><a href="https://twitter.com" target="_blank">twitter</a></li>
-          <li><a href="https://github.com" target="_blank">github</a></li>
-          <li><a href="https://wordpress.org" target="_blank">wordpress</a></li>
-          <li><a href="https://youtube.com" target="_blank">youtube</a></li>
-          <li><a href="https://instagram.com" target="_blank">instagram</a></li>
+          <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a></li>
+          <li><a href="https://wordpress.org" target="_blank"><i class="fab fa-wordpress"></i></a></li>
+          <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="https://api.whatsapp.com/send?phone=+5215512345678" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
         </ul>
       </nav>
       <div class="Footer-copy">
@@ -218,12 +219,13 @@
     <section class="Footer-container">
       <nav class="SocialMedia">
         <ul>
-          <li><a href="https://facebook.com" target="_blank">facebook</a></li>
-          <li><a href="https://twitter.com" target="_blank">twitter</a></li>
-          <li><a href="https://github.com" target="_blank">github</a></li>
-          <li><a href="https://wordpress.org" target="_blank">wordpress</a></li>
-          <li><a href="https://youtube.com" target="_blank">youtube</a></li>
-          <li><a href="https://instagram.com" target="_blank">instagram</a></li>
+          <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a></li>
+          <li><a href="https://wordpress.org" target="_blank"><i class="fab fa-wordpress"></i></a></li>
+          <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="https://api.whatsapp.com/send?phone=+5215512345678" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
         </ul>
       </nav>
       <div class="Footer-copy">
@@ -265,7 +267,6 @@ Text Domain: kenai
 ## Comentarios functions.php
 
 ```php
-<?php
 /**
  * Kenai Theme functions and definitions
  *
@@ -276,7 +277,6 @@ Text Domain: kenai
  * @since 1.0.0
  * @version 1.0.0
  */
-?>
 ```
 
 **[🔙 Regresar](#snippets-code-wordpress)**
@@ -286,7 +286,8 @@ Text Domain: kenai
 ```php
 function kenai_scripts () {
   wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Raleway:400,700', array(), '1.0.0', 'all' );
-  wp_enqueue_style( 'style', get_stylesheet_uri(), array('google-fonts', 'custom-properties'), '1.0.0', 'all' );
+  wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.6.1/css/all.css', array(), '5.6.1', 'all' );
+  wp_enqueue_style( 'style', get_stylesheet_uri(), array('google-fonts', 'font-awesome'), '1.0.0', 'all' );
 
   wp_enqueue_script( 'jquery' );
   wp_enqueue_script( 'script', get_template_directory_uri() . '/script.js', array('jquery'), '1.0.0', true );
@@ -329,7 +330,7 @@ endif;
 ## Paginación
 
 ```php
-<?php if ( get_next_posts_link() || get_previous_posts_link() ): ?>
+<?php if ( get_next_posts_link() OR get_previous_posts_link() ): ?>
   <div class="Pagination">
     <nav>
       <?php
@@ -351,8 +352,7 @@ endif;
 function kenai_menus () {
   register_nav_menus(array(
     'menu_main' => __('Menú Principal', 'kenai'),
-    'menu_social' => __('Menú Redes Sociales', 'kenai'),
-    'menu_about' => __('Menú de Identidad', 'kenai')
+    'menu_social' => __('Menú Redes Sociales', 'kenai')
   ));
 }
 
@@ -365,7 +365,8 @@ if ( has_nav_menu( 'menu_main' ) ):
   wp_nav_menu(array(
     'theme_location' => 'menu_main',
     'container' => 'nav',
-    'container_class' => 'Menu MenuMain'
+    'container_id' => 'Menu',
+    'container_class' => 'Menu'
   ));
 else:
 ?>
@@ -383,28 +384,11 @@ if ( has_nav_menu( 'menu_social' ) ):
   wp_nav_menu( array(
     'theme_location' => 'menu_social',
     'container' => 'nav',
-    'container_id' => 'MenuSocial',
-    'container_class' => 'Menu MenuSocial',
-    'link_before' => '<span class="sr-text">',
-    'link_after' => '</span>'
+    'container_id' => 'SocialMedia',
+    'container_class' => 'SocialMedia'
   ) );
 else:
   echo '<p><small>Aquí puedes agregar un menú de redes sociales, créalo desde tu wp-admin.</small></p>';
-endif;
-?>
-
-/*   **********   **********   **********   */
-
-<?php
-if ( has_nav_menu( 'menu_about' ) ):
-  wp_nav_menu( array(
-    'theme_location' => 'menu_about',
-    'container' => 'nav',
-    'container_id' => 'MenuAbout',
-    'container_class' => 'Menu  MenuAbout'
-  ) );
-else:
-  echo '<p><small>Aquí puedes agregar un menú de identidad corporativa, créalo desde tu wp-admin.</small></p>';
 endif;
 ?>
 ```
@@ -453,13 +437,11 @@ else:
 
 /*   **********   **********   **********   */
 
-<?php
-  if ( is_active_sidebar( 'sidebar_footer' ) ):
-    dynamic_sidebar( 'sidebar_footer' );
-  else:
-    echo 'Aquí puedes agregar un copy personalizado, hazlo desde tu wp-admin.';
-  endif;
-?>
+if ( is_active_sidebar( 'sidebar_footer' ) ):
+  dynamic_sidebar( 'sidebar_footer' );
+else:
+  echo '<p><small>Aquí puedes agregar un copy personalizado, hazlo desde tu wp-admin.</small></p>';
+endif;
 ```
 
 **[🔙 Regresar](#snippets-code-wordpress)**
@@ -495,7 +477,13 @@ function kenai_setup () {
   add_theme_support( 'automatic-feed-links' );
 
   remove_action('wp_head', 'wp_generator');
+}
 
+add_action( 'after_setup_theme', 'kenai_setup' );
+
+/*   **********   **********   **********   */
+
+function kenai_custom_header () {
   add_theme_support( 'custom-logo', array (
     'height' => 100,
     'width' => 100,
@@ -514,9 +502,21 @@ function kenai_setup () {
   ) );
 
   add_theme_support( 'customize-selective-refresh-widgets' );
+
+  add_theme_support( 'custom-header', apply_filters( 'kenai_custom_header_args', array (
+    'default-image' => get_template_directory_uri() . '/img/header-image.jpg',
+    'default-text-color' => '000',
+    'width' => 1200,
+    'height' => 720,
+    'flex-width' => true,
+    'flex-height' => true,
+    'video' => true
+  )) );
 }
 
-add_action( 'after_setup_theme', 'kenai_setup' );
+add_action( 'after_setup_theme', 'kenai_custom_header' );
+
+/*   **********   **********   **********   */
 
 function kenai_excerpt_more () {
   return '<a href="' . get_permalink() . '">'. __(' leer más...', 'kenai') .'</a>';
@@ -529,6 +529,8 @@ function kenai_excerpt_length () {
 }
 
 add_filter( 'excerpt_length', 'kenai_excerpt_length' );
+
+/*   **********   **********   **********   */
 
 function kenai_custom_meta_description () {
   if ( is_home () || is_front_page() ) {
@@ -563,6 +565,14 @@ function kenai_custom_meta_description () {
     <img src="<?php echo get_template_directory_uri() . '/img/custom-logo.png'; ?>" alt="<?php bloginfo( 'name' ); ?>">
   </a>
 <?php endif; ?>
+
+/*   **********   **********   **********   */
+
+if ( is_home() || is_front_page() ):
+  if ( has_custom_header()  ):
+    the_custom_header_markup();
+  endif;
+endif;
 ```
 
 **[🔙 Regresar](#snippets-code-wordpress)**
@@ -570,8 +580,11 @@ function kenai_custom_meta_description () {
 ## Datos autor
 
 ```html
-<aside class="AuthorInfo">
-  <h3><?php _e('Información del Autor:', 'kenai'); ?></h3>
+<aside class="Author-info">
+  <div>
+    <h3><?php _e('Información del Autor:', 'kenai'); ?></h3>
+    <?php echo get_avatar( get_the_author_meta('ID'), 500 ); ?>
+  </div>
   <ul>
     <li>
       <?php _e('Usuario: ', 'kenai'); the_author(); ?>
@@ -599,9 +612,6 @@ function kenai_custom_meta_description () {
     </li>
     <li>
       <?php _e('Número de publicaciones: ', 'kenai'); echo get_the_author_posts(); ?>
-    </li>
-    <li>
-      <?php _e('Avatar: ', 'kenai'); echo get_avatar( get_the_author_meta('ID'), 500 ); ?>
     </li>
   </ul>
 </aside>
